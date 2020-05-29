@@ -1,0 +1,19 @@
+<%- include('partials/header'); %>
+<h1>Contact</h1>
+<ol>
+  <li>Email:pranavkumster@gmail.com</li>
+  <li>Phone: +1 (609)605 6875</li>
+  <li>Twitter:@Inlove_world</li>
+</ol>
+<hr>
+<h3>Please filled up form and send your message.</h3>
+<form action="mailto:pranavkumster@gmail.com?subject=feedback" method="post" enctype="text/plain">
+  <label>Your Name:</label>
+  <input type="text" name="Your Name" value=""><br>
+  <label>Your Email:</label>
+  <input type="email" name="Your Email" value=""><br>
+  <label>Your Message</label><br>
+  <textarea name="Your Message" rows="5" cols="20"></textarea><br>
+  <input type="submit" name="" class="btn btn-primary btn-sm" value="Submit">
+</form>
+<%- include('partials/footer'); %>
