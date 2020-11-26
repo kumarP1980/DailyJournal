@@ -4,7 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const _ = require("lodash");
-
+const expressSanitizer = require('express-sanitizer');
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -13,6 +13,8 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(express.static("public"));
+
+app.use(expressSanitizer());
 
 // Define mongoose
 var mongoose = require('mongoose');
@@ -82,9 +84,10 @@ app.post("/compose", function(req, res) {
 
   // Insert in Person table
   const Blog = mongoose.model('Blog', blogSchema);
+  let blogData = req.sanitize(req.body.body.content);
   const blog = new Blog({
     title: req.body.title,
-    blog: req.body.blog,
+    blog: blogData,
     date: today
   });
   blog.save(function(err) {

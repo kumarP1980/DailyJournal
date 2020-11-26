@@ -1,14 +1,45 @@
 <%- include('partials/header'); %>
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <h1>Compose</h1>
 <form class="" action="/compose" method="post">  
   <div class="form-group">
     <label for="usr">Title</label>
     <input type="text" class="form-control" id="usr" name="title">
   </div>
-  <div class="form-group">
+  <!--<div class="form-group">
     <label for="comment">Post</label>
     <textarea name="blog" rows="8" cols="80" class="form-control"></textarea>
   </div>
-  <button type="submit" name="button" class="btn btn-primary btn-sm">Publish</button>
+  <button type="submit" name="button" class="btn btn-primary btn-sm">Publish</button>-->
+  <div class="form-group">    
+    <input type="hidden" name="body[title]">
+     <div id="editor"></div>     
+  </div>
+  <button type="submit" name="button" class="btn btn-primary btn-sm" onclick="return quillContents()">Publish</button>
+ 
 </form>
 <%- include('partials/footer'); %>
+
+<!-- Include the Quill library -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<!-- Initialize Quill editor -->
+<script>
+  var quill = new Quill('#editor', {
+    theme: 'snow',
+    placeholder: 'New Update'
+  });
+
+  const quillContents = () => {
+         const form = document.forms[0]
+         const editor = document.createElement('input')
+
+         editor.type = 'hidden'
+         editor.name = 'body[content]'
+         editor.value = document.querySelector('.ql-editor').innerHTML
+         form.appendChild(editor)
+
+         return form.submit()
+     }
+
+</script>
